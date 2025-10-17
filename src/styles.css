@@ -1,0 +1,25 @@
+:root{
+  --color-light: #ffffff;
+  --color-fonte: #000000;
+  --color-bg: #0b0f19;
+  --color-primary: #f4f7fa;
+  --color-secondary: #012a5b;
+  --color-terciary: #f3f3f3;
+  --color-accent: #00aaff;
+
+  --color-surface: #111626;
+  --color-surface-alt: #1b2136;
+  --color-panel: #161b2e;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  position: relative;
+  font-family: "Roboto", sans-serif;
+  background: var(--color-primary);
+}

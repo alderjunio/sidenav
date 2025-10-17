@@ -1,0 +1,8 @@
+.header{
+    background-color: var(--color-bg);
+    height: 60px;
+    color: var(--color-light);
+    padding: 20px;
+    display: flex;
+    justify-content: end;
+}
