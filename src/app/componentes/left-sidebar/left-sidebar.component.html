@@ -2,12 +2,38 @@
   class="sidenav"
   [ngClass]="isLeftSidebarCollapsed() ? 'sidenav-collapsed' : ''"
 >
+  <!-- Botão de menu -->
   <div class="logo-container">
     <button class="logo" (click)="alternarMenu()">
       <i class="fal fa-bars"></i>
     </button>
   </div>
 
+  <!-- Bloco do usuário -->
+  <div class="user-section">
+    <img
+      class="user-avatar"
+      [src]="usuario?.avatar || 'https://i.pravatar.cc/100'"
+      alt="Avatar"
+    />
+
+    @if (!isLeftSidebarCollapsed()) {
+      <div class="user-info">
+        <span class="user-name">{{ usuario?.nome || 'Usuário' }}</span>
+        <button class="logout-btn" (click)="logout()">
+          <i class="fal fa-sign-out"></i>
+          <span class="logout-text">Sair</span>
+        </button>
+      </div>
+    }
+    @else {
+      <button class="logout-icon-only" (click)="logout()">
+        <i class="fal fa-sign-out"></i>
+      </button>
+    }
+  </div>
+
+  <!-- Menu -->
   <div class="sidenav-nav">
     @for (item of items; track $index) {
       <li class="sidenav-nav-item">

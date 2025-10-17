@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, input, output } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-left-sidebar',
@@ -12,6 +13,9 @@ import { RouterModule } from '@angular/router';
 export class LeftSidebarComponent {
   isLeftSidebarCollapsed = input.required<boolean>();
   changeIsLeftSidebarCollapsed = output<boolean>();
+
+  usuario: any = null;
+
   items = [
     {
       routeLink: 'dashboard',
@@ -35,8 +39,19 @@ export class LeftSidebarComponent {
     },
   ];
 
+  constructor(private authService: AuthService, private router: Router) {}
+
+  ngOnInit(): void {
+    this.usuario = this.authService.getUsuario();
+  }
+
   alternarMenu(): void {
     this.changeIsLeftSidebarCollapsed.emit(!this.isLeftSidebarCollapsed());
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(['/login']);
   }
 
 }
