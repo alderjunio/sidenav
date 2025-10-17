@@ -1,6 +1,6 @@
 .sidenav {
   background: var(--color-bg);
-  transition: all 0.5s ease;
+  transition: all 0.1s ease;
   position: fixed;
   z-index: 1;
   top: 0;
@@ -16,7 +16,6 @@
   padding: 0.938rem 0.938rem 0 0.938rem;
   width: 100%;
 }
-
 
 .sidenav .logo-container .logo {
   background: var(--color-surface-alt);

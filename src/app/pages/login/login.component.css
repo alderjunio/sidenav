@@ -36,7 +36,7 @@ label{
   border: 1px solid var(--color-panel);
   border-radius: 12px;
   background-color: var(--color-surface-alt);
-  color: var(--color-text);
+  color: var(--color-light);
   font-size: 1rem;
   margin: 10px 0;
 }
@@ -62,4 +62,9 @@ label{
 
 .login-card button:hover {
   transform: scale(1.03);
+}
+
+.login-card .erro{
+  margin-top: 20px;
+  color: red;
 }
