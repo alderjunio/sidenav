@@ -1,6 +1,6 @@
 import { Component, HostListener, OnInit, signal } from '@angular/core';
-import { LeftSidebarComponent } from './left-sidebar/left-sidebar.component';
-import { MainComponent } from './main/main.component';
+import { LeftSidebarComponent } from './componentes/left-sidebar/left-sidebar.component';
+import { MainComponent } from './pages/main/main.component';
 
 @Component({
   selector: 'app-root',

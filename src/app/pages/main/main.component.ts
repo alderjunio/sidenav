@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, computed, input } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from '../header/header.component';
+import { HeaderComponent } from '../../componentes/header/header.component';
 
 @Component({
   selector: 'app-main',
