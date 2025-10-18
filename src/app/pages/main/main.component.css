@@ -24,3 +24,9 @@
 .conteudo{
   padding: 20px;
 }
+
+@media (max-width: 768px) {
+  .conteudo{
+  padding: 10px;
+}
+}

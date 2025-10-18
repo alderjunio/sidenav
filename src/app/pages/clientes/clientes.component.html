@@ -1,1 +1,48 @@
-<h2>Clientes</h2>
+<div class="clientes-container">
+  <h2>Pesquisar Clientes</h2>
+
+  <div class="search-box">
+    <select [(ngModel)]="searchType">
+      <option value="cod_empresa">Código da Empresa</option>
+      <option value="nome">Nome (Razão Social / Fantasia)</option>
+      <option value="cnpj">CNPJ</option>
+    </select>
+
+    <input
+      type="text"
+      placeholder="Digite e pressione Enter..."
+      [(ngModel)]="searchValue"
+    />
+
+    <button (click)="buscarCliente()">Buscar</button>
+  </div>
+
+  <div *ngIf="loading" class="loading">Carregando...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <!-- === LISTA DE CARDS === -->
+  <div class="cards" *ngIf="clientes.length > 0">
+    <div class="card" *ngFor="let c of clientes" (click)="selecionarCliente(c)">
+      <h3>{{ c.fantasia }}</h3>
+      <p><strong>Código:</strong> {{ c.cod_empresa }}</p>
+      <p><strong>CNPJ:</strong> {{ c.cnpj }}</p>
+      <p><strong>Razão:</strong> {{ c.razao_social }}</p>
+    </div>
+  </div>
+
+  <!-- === CLIENTE SELECIONADO === -->
+  <div class="cliente-detalhes" *ngIf="clienteSelecionado">
+    <h3>{{ clienteSelecionado.fantasia }}</h3>
+    <p><strong>Código:</strong> {{ clienteSelecionado.cod_empresa }}</p>
+    <p><strong>CNPJ:</strong> {{ clienteSelecionado.cnpj }}</p>
+    <p><strong>Razão Social:</strong> {{ clienteSelecionado.razao_social }}</p>
+    <p>
+      <strong>Endereço:</strong>
+      {{ clienteSelecionado.logradouro }}, {{ clienteSelecionado.numero }},
+      {{ clienteSelecionado.bairro }} -
+      {{ clienteSelecionado.municipio }}/{{ clienteSelecionado.uf }}
+    </p>
+    <p><strong>Email:</strong> {{ clienteSelecionado.email }}</p>
+    <p><strong>Telefone:</strong> {{ clienteSelecionado.telefone }}</p>
+  </div>
+</div>

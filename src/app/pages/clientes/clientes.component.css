@@ -1,0 +1,141 @@
+.clientes-container {
+  color: var(--color-fonte);
+}
+
+/* === Search Box === */
+.search-box {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.search-box select,
+.search-box input {
+  padding: 10px;
+  font-size: 16px;
+  flex: 1 1 100%; /* permite encolher e crescer */
+  min-width: 0;   /* evita overflow em telas pequenas */
+  box-sizing: border-box;
+}
+
+.search-box button {
+  background: var(--color-secondary);
+  color: white;
+  padding: 10px 18px;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+  transition: 0.2s;
+  flex-shrink: 0; /* botão não encolhe demais */
+}
+
+.search-box button:hover {
+  background: var(--color-accent);
+  color: black;
+}
+
+/* === Cards === */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); /* menor min para mobile */
+  gap: 15px;
+}
+
+.card {
+  background: var(--color-surface-alt);
+  color: white;
+  padding: 15px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  word-wrap: break-word; /* quebra textos longos */
+}
+
+.card:hover {
+  transform: scale(1.03);
+  background: var(--color-accent);
+  color: black;
+}
+
+/* === Detalhes do cliente === */
+.cliente-detalhes {
+  background: var(--color-surface);
+  padding: 20px;
+  border-radius: 10px;
+  margin-top: 20px;
+  color: white;
+  word-wrap: break-word;
+}
+
+/* === Mensagens === */
+.loading {
+  color: #00aaff;
+}
+
+.error {
+  color: red;
+}
+
+/* === Responsivo === */
+@media (max-width: 600px) {
+  .search-box {
+    flex-direction: column;
+  }
+
+  .cards {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    text-align: center;
+  }
+}
+
+@media (max-width: 400px) {
+  .search-box input,
+  .search-box select {
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .search-box button {
+    padding: 8px 12px;
+  }
+
+  .cards {
+    gap: 10px;
+  }
+
+  .card {
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  .cliente-detalhes {
+    padding: 15px;
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 320px) {
+  .search-box {
+    gap: 5px;
+  }
+
+  .search-box input,
+  .search-box select,
+  .search-box button {
+    font-size: 12px;
+    padding: 6px 8px;
+  }
+
+  .card {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  .cliente-detalhes {
+    padding: 10px;
+    font-size: 12px;
+  }
+}
