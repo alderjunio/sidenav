@@ -1,4 +1,10 @@
-import { Component, HostListener } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  ViewChild,
+  ElementRef,
+  AfterViewInit,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ClientesService, Cliente } from '../../services/clientes.service';
@@ -8,19 +14,39 @@ import { ClientesService, Cliente } from '../../services/clientes.service';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './clientes.component.html',
-  styleUrls: ['./clientes.component.css'],
+  styleUrls: ['./clientes.component.css', './clientes.mobile.component.css'],
 })
-export class ClientesComponent {
-  searchType: string = 'cod_empresa'; // padrão
+export class ClientesComponent implements AfterViewInit {
+  @ViewChild('inputPesquisa') inputPesquisa!: ElementRef;
+
+  searchType: string = 'cod_empresa';
   searchValue: string = '';
   clientes: Cliente[] = [];
   clienteSelecionado: Cliente | null = null;
   loading = false;
   error = '';
 
+  // 🆕 Variáveis para o modal
+  showModal = false;
+  clienteEditando: Partial<Cliente> = {
+  cod_empresa: 0,
+  razao_social: '',
+  fantasia: '',
+  cnpj: '',
+  telefone: '',
+  email: '',
+  logradouro: '',
+};
+
+
   constructor(private clientesService: ClientesService) {}
 
-  // 🔍 Executa a busca de clientes conforme o tipo selecionado
+  // 🧭 Dá foco no campo de pesquisa ao carregar o componente
+  ngAfterViewInit() {
+    setTimeout(() => this.inputPesquisa?.nativeElement.focus(), 0);
+  }
+
+  // 🔍 Busca clientes
   buscarCliente() {
     this.error = '';
     this.loading = true;
@@ -55,19 +81,18 @@ export class ClientesComponent {
         this.loading = false;
 
         if (Array.isArray(res) && res.length > 1) {
-          // Vários clientes encontrados
           this.clientes = res;
         } else if (Array.isArray(res) && res.length === 1) {
-          // Um único cliente retornado (lista com 1)
           this.clienteSelecionado = res[0];
-          this.searchValue = ''; // limpa campo
+          this.searchValue = '';
         } else if (res && !Array.isArray(res)) {
-          // Um único objeto retornado
           this.clienteSelecionado = res;
-          this.searchValue = ''; // limpa campo
+          this.searchValue = '';
         } else {
           this.error = 'Nenhum cliente encontrado.';
         }
+
+        setTimeout(() => this.inputPesquisa?.nativeElement.focus(), 0);
       },
       error: (err) => {
         this.loading = false;
@@ -77,14 +102,15 @@ export class ClientesComponent {
     });
   }
 
-  // 📌 Seleciona cliente de uma lista (ao clicar no card)
+  // 📌 Seleciona cliente da lista
   selecionarCliente(cliente: Cliente) {
     this.clienteSelecionado = cliente;
     this.clientes = [];
-    this.searchValue = ''; // limpa campo
+    this.searchValue = '';
+    setTimeout(() => this.inputPesquisa?.nativeElement.focus(), 0);
   }
 
-  // ⌨️ Pressionar Enter executa a busca
+  // 🧭 Pressionar Enter executa busca
   @HostListener('document:keydown.enter', ['$event'])
   onEnter(event: KeyboardEvent) {
     const el = document.activeElement as HTMLElement;
@@ -92,4 +118,34 @@ export class ClientesComponent {
       this.buscarCliente();
     }
   }
+
+  // 🆕 Modal de edição
+  abrirModalEdicao() {
+    if (!this.clienteSelecionado) return;
+    this.showModal = true;
+    // Cria uma cópia para editar sem alterar o original
+    this.clienteEditando = { ...this.clienteSelecionado };
+  }
+
+  fecharModal() {
+    this.showModal = false;
+  }
+
+  salvarEdicao() {
+  if (this.clienteSelecionado && this.clienteEditando) {
+    this.clientesService.updateCliente(this.clienteSelecionado.cod_empresa, this.clienteEditando)
+      .subscribe({
+        next: () => {
+          alert('Cliente atualizado com sucesso!');
+          this.clienteSelecionado = { ...this.clienteSelecionado, ...this.clienteEditando } as Cliente;
+          this.fecharModal();
+        },
+        error: (err) => {
+          console.error(err);
+          alert('Erro ao atualizar cliente');
+        }
+      });
+  }
+}
+
 }

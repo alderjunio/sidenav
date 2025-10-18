@@ -8,11 +8,7 @@
       <option value="cnpj">CNPJ</option>
     </select>
 
-    <input
-      type="text"
-      placeholder="Digite e pressione Enter..."
-      [(ngModel)]="searchValue"
-    />
+    <input type="text" placeholder="Digite e pressione Enter..." [(ngModel)]="searchValue" />
 
     <button (click)="buscarCliente()">Buscar</button>
   </div>
@@ -32,17 +28,179 @@
 
   <!-- === CLIENTE SELECIONADO === -->
   <div class="cliente-detalhes" *ngIf="clienteSelecionado">
-    <h3>{{ clienteSelecionado.fantasia }}</h3>
-    <p><strong>Código:</strong> {{ clienteSelecionado.cod_empresa }}</p>
-    <p><strong>CNPJ:</strong> {{ clienteSelecionado.cnpj }}</p>
-    <p><strong>Razão Social:</strong> {{ clienteSelecionado.razao_social }}</p>
-    <p>
-      <strong>Endereço:</strong>
-      {{ clienteSelecionado.logradouro }}, {{ clienteSelecionado.numero }},
-      {{ clienteSelecionado.bairro }} -
-      {{ clienteSelecionado.municipio }}/{{ clienteSelecionado.uf }}
-    </p>
-    <p><strong>Email:</strong> {{ clienteSelecionado.email }}</p>
-    <p><strong>Telefone:</strong> {{ clienteSelecionado.telefone }}</p>
+    <div class="cliente-detalhes-content">
+      <p><strong>Código:</strong> {{ clienteSelecionado.cod_empresa }}</p>
+      <p><strong>Razão Social:</strong> {{ clienteSelecionado.razao_social }}</p>
+      <p><strong>Fantasia:</strong> {{ clienteSelecionado.fantasia }}</p>
+    </div>
+
+    <div class="cliente-detalhes-content">
+      <p><strong>CNPJ:</strong> {{ clienteSelecionado.cnpj }}</p>
+      <p><strong>Inscrição Municipal:</strong> {{ clienteSelecionado.inscricao_municipal }}</p>
+      <p><strong>Inscrição Estadual:</strong> {{ clienteSelecionado.inscricao_estadual }}</p>
+      <p><strong>Inscrição Suframa:</strong> {{ clienteSelecionado.inscricao_suframa }}</p>
+    </div>
+
+    <div class="cliente-detalhes-content">
+      <p><strong>Endereço:</strong> {{ clienteSelecionado.logradouro }} {{ clienteSelecionado.numero }} {{
+        clienteSelecionado.complemento }} {{ clienteSelecionado.bairro }} {{ clienteSelecionado.municipio }}/{{
+        clienteSelecionado.uf }} - {{ clienteSelecionado.cep }}
+      </p>
+    </div>
+
+    <div class="cliente-detalhes-content">
+      <p><strong>Telefone:</strong> {{ clienteSelecionado.telefone }}</p>
+      <p><strong>Email:</strong> {{ clienteSelecionado.email }}</p>
+    </div>
+
+    <button class="btn-editar" (click)="abrirModalEdicao()">Editar Cliente</button>
   </div>
-</div>
+
+  <!-- === MODAL DE EDIÇÃO === -->
+  <div class="modal-backdrop" *ngIf="showModal">
+    <div class="modal">
+      <h3>Editar Cliente</h3>
+
+      <form (ngSubmit)="salvarEdicao()">
+        <label>
+          Razão Social:
+          <input [(ngModel)]="clienteEditando.razao_social" name="razao_social" />
+        </label>
+
+        <label>
+          Fantasia:
+          <input [(ngModel)]="clienteEditando.fantasia" name="fantasia" />
+        </label>
+
+        <label>
+          Telefone:
+          <input [(ngModel)]="clienteEditando.telefone" name="telefone" />
+        </label>
+
+        <label>
+          Email:
+          <input [(ngModel)]="clienteEditando.email" name="email" />
+        </label>
+
+        <label>
+          Logradouro:
+          <input [(ngModel)]="clienteEditando.logradouro" name="logradouro" />
+        </label>
+
+        <label>
+          Número:
+          <input [(ngModel)]="clienteEditando.numero" name="numero" />
+        </label>
+
+        <label>
+          Complemento:
+          <input [(ngModel)]="clienteEditando.complemento" name="complemento" />
+        </label>
+
+        <label>
+          Bairro:
+          <input [(ngModel)]="clienteEditando.bairro" name="bairro" />
+        </label>
+
+        <label>
+          Cep:
+          <input [(ngModel)]="clienteEditando.cep" name="cep" />
+        </label>
+
+        <label>
+          Município:
+          <input [(ngModel)]="clienteEditando.municipio" name="municipio" />
+        </label>
+
+        <label>
+          UF:
+          <input [(ngModel)]="clienteEditando.uf" name="uf" />
+        </label>
+
+        <label>
+          Complemento:
+          <input [(ngModel)]="clienteEditando.complemento" name="complemento" />
+        </label>
+
+        <label>
+          Empresário:
+          <input [(ngModel)]="clienteEditando.empresario" name="empresario" />
+        </label>
+
+        <label>
+          Cpf do Empresário:
+          <input [(ngModel)]="clienteEditando.cpf_empresario" name="cpf_empresario" />
+        </label>
+
+        <label>
+          Cód do Simples Nacional:
+          <input [(ngModel)]="clienteEditando.cod_simples" name="cod_simples" />
+        </label>
+
+        <label>
+          Login Saatri:
+          <input [(ngModel)]="clienteEditando.login_saatri" name="login_saatri" />
+        </label>
+
+         <label>
+          Senha Saatri:
+          <input [(ngModel)]="clienteEditando.pass_saatri" name="pass_saatri" />
+        </label>
+
+        <label>
+          Inscrição Estadual:
+          <input [(ngModel)]="clienteEditando.inscricao_estadual" name="inscricao_estadual" />
+        </label>
+
+         <label>
+          Senha Sefaz RR:
+          <input [(ngModel)]="clienteEditando.pass_sefaz" name="pass_sefaz" />
+        </label>
+
+         <label>
+          Inscrição Suframa:
+          <input [(ngModel)]="clienteEditando.inscricao_suframa" name="inscricao_suframa" />
+        </label>
+
+        <label>
+          Senha Sefaz RR:
+          <input [(ngModel)]="clienteEditando.pass_suframa" name="pass_suframa" />
+        </label>
+
+         <label>
+          QSA:
+          <input [(ngModel)]="clienteEditando.qsa" name="qsa" />
+        </label>
+
+        <label>
+          Situação na peace:
+          <input [(ngModel)]="clienteEditando.situacao_na_peace" name="situacao_na_peace" />
+        </label>
+
+        <label>
+          Emite NFSE ?
+          <input [(ngModel)]="clienteEditando.emite_nfse" name="emite_nfse" />
+        </label>
+
+        <label>
+          Tipo de tributação
+          <input [(ngModel)]="clienteEditando.tributacao_id" name="tributacao_id" />
+        </label>
+
+         <label>
+          Inscrição Municipal
+          <input [(ngModel)]="clienteEditando.inscricao_municipal" name="inscricao_municipal" />
+        </label>
+
+         <label>
+          Processo Mensal
+          <input [(ngModel)]="clienteEditando.processo_mensal" name="processo_mensal" />
+        </label>
+
+        <div class="modal-buttons">
+          <button type="submit">Salvar</button>
+          <button type="button" (click)="fecharModal()">Cancelar</button>
+        </div>
+      </form>
+    </div>
+  </div>

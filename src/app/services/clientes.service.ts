@@ -3,21 +3,38 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 export interface Cliente {
-  id: number;
-  cod_empresa: number;
-  cnpj: string;
-  razao_social: string;
-  fantasia: string;
-  situacao: string;
-  logradouro: string;
-  numero: number;
-  complemento: string;
-  bairro: string;
-  cep: string;
-  municipio: string;
-  uf: string;
-  email: string;
-  telefone: string;
+id: number;
+    cod_empresa: number;
+    cnpj: string;
+    razao_social: string;
+    fantasia: string;
+    situacao: string;
+    logradouro: string;
+    numero: number;
+    complemento: string;
+    bairro: string;
+    cep: string;
+    municipio: string;
+    uf: string;
+    atividade_principal: string;
+    atividades_secundarias: string;
+    email: string,
+    telefone: string,
+    empresario: string,
+    cpf_empresario: string,
+    cod_simples: string,
+    login_saatri: string,
+    pass_saatri: string,
+    pass_sefaz: string,
+    inscricao_estadual: string,
+    pass_suframa: string,
+    qsa: string,
+    situacao_na_peace:number,
+    emite_nfse: number,
+    tributacao_id: number,
+    inscricao_municipal: string,
+    inscricao_suframa: string,
+    processo_mensal: string
 }
 
 @Injectable({
@@ -36,8 +53,12 @@ export class ClientesService {
   return this.http.get(`${this.apiUrl}/nome/${nome}`);
 }
 
-
   getByCnpj(cnpj: string): Observable<any> {
     return this.http.get(`${this.apiUrl}/cnpj/${cnpj}`);
   }
+
+  updateCliente(id: number, dados: Partial<Cliente>): Observable<any> {
+  return this.http.patch(`${this.apiUrl}/${id}`, dados);
+}
+
 }
