@@ -6,16 +6,4 @@
     gap: 5px;
     margin-bottom: 10px;
   }
-
-  .modal {
-  background: var(--color-surface-alt);
-  color: white;
-  padding: 10px;
-  border-radius: 10px;
-  width: 95%;
-  max-width: 400px;
-  box-sizing: border-box;
-  margin-left: 85px;
-  margin-right: 5px;
-}
 }

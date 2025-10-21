@@ -56,151 +56,147 @@
     <button class="btn-editar" (click)="abrirModalEdicao()">Editar Cliente</button>
   </div>
 
-  <!-- === MODAL DE EDIÇÃO === -->
-  <div class="modal-backdrop" *ngIf="showModal">
-    <div class="modal">
-      <h3>Editar Cliente</h3>
+  <!-- === FORMULÁRIO DE EDIÇÃO (AGORA INLINE) === -->
+<div *ngIf="showModal" class="form-edicao">
+  <h3>Editar Cliente</h3>
 
-      <form (ngSubmit)="salvarEdicao()">
-        <label>
-          Razão Social:
-          <input [(ngModel)]="clienteEditando.razao_social" name="razao_social" />
-        </label>
+  <form (ngSubmit)="salvarEdicao()">
+    <div class="form-grid">
+      <label>
+        Razão Social:
+        <input [(ngModel)]="clienteEditando.razao_social" name="razao_social" />
+      </label>
 
-        <label>
-          Fantasia:
-          <input [(ngModel)]="clienteEditando.fantasia" name="fantasia" />
-        </label>
+      <label>
+        Fantasia:
+        <input [(ngModel)]="clienteEditando.fantasia" name="fantasia" />
+      </label>
 
-        <label>
-          Telefone:
-          <input [(ngModel)]="clienteEditando.telefone" name="telefone" />
-        </label>
+      <label>
+        Telefone:
+        <input [(ngModel)]="clienteEditando.telefone" name="telefone" />
+      </label>
 
-        <label>
-          Email:
-          <input [(ngModel)]="clienteEditando.email" name="email" />
-        </label>
+      <label>
+        Email:
+        <input [(ngModel)]="clienteEditando.email" name="email" />
+      </label>
 
-        <label>
-          Logradouro:
-          <input [(ngModel)]="clienteEditando.logradouro" name="logradouro" />
-        </label>
+      <label>
+        Logradouro:
+        <input [(ngModel)]="clienteEditando.logradouro" name="logradouro" />
+      </label>
 
-        <label>
-          Número:
-          <input [(ngModel)]="clienteEditando.numero" name="numero" />
-        </label>
+      <label>
+        Número:
+        <input [(ngModel)]="clienteEditando.numero" name="numero" />
+      </label>
 
-        <label>
-          Complemento:
-          <input [(ngModel)]="clienteEditando.complemento" name="complemento" />
-        </label>
+      <label>
+        Complemento:
+        <input [(ngModel)]="clienteEditando.complemento" name="complemento" />
+      </label>
 
-       <!--  <label>
-          Bairro:
-          <input [(ngModel)]="clienteEditando.bairro" name="bairro" />
-        </label>
+      <label>
+        Bairro:
+        <input [(ngModel)]="clienteEditando.bairro" name="bairro" />
+      </label>
 
-        <label>
-          Cep:
-          <input [(ngModel)]="clienteEditando.cep" name="cep" />
-        </label>
+      <label>
+        CEP:
+        <input [(ngModel)]="clienteEditando.cep" name="cep" />
+      </label>
 
-        <label>
-          Município:
-          <input [(ngModel)]="clienteEditando.municipio" name="municipio" />
-        </label>
+      <label>
+        Município:
+        <input [(ngModel)]="clienteEditando.municipio" name="municipio" />
+      </label>
 
-        <label>
-          UF:
-          <input [(ngModel)]="clienteEditando.uf" name="uf" />
-        </label>
+      <label>
+        UF:
+        <input [(ngModel)]="clienteEditando.uf" name="uf" />
+      </label>
 
-        <label>
-          Complemento:
-          <input [(ngModel)]="clienteEditando.complemento" name="complemento" />
-        </label>
+      <label>
+        Empresário:
+        <input [(ngModel)]="clienteEditando.empresario" name="empresario" />
+      </label>
 
-        <label>
-          Empresário:
-          <input [(ngModel)]="clienteEditando.empresario" name="empresario" />
-        </label>
+      <label>
+        CPF do Empresário:
+        <input [(ngModel)]="clienteEditando.cpf_empresario" name="cpf_empresario" />
+      </label>
 
-        <label>
-          Cpf do Empresário:
-          <input [(ngModel)]="clienteEditando.cpf_empresario" name="cpf_empresario" />
-        </label>
+      <label>
+        Cód Simples Nacional:
+        <input [(ngModel)]="clienteEditando.cod_simples" name="cod_simples" />
+      </label>
 
-        <label>
-          Cód do Simples Nacional:
-          <input [(ngModel)]="clienteEditando.cod_simples" name="cod_simples" />
-        </label>
+      <label>
+        Login Saatri:
+        <input [(ngModel)]="clienteEditando.login_saatri" name="login_saatri" />
+      </label>
 
-        <label>
-          Login Saatri:
-          <input [(ngModel)]="clienteEditando.login_saatri" name="login_saatri" />
-        </label>
+      <label>
+        Senha Saatri:
+        <input [(ngModel)]="clienteEditando.pass_saatri" name="pass_saatri" />
+      </label>
 
-         <label>
-          Senha Saatri:
-          <input [(ngModel)]="clienteEditando.pass_saatri" name="pass_saatri" />
-        </label>
+      <label>
+        Inscrição Estadual:
+        <input [(ngModel)]="clienteEditando.inscricao_estadual" name="inscricao_estadual" />
+      </label>
 
-        <label>
-          Inscrição Estadual:
-          <input [(ngModel)]="clienteEditando.inscricao_estadual" name="inscricao_estadual" />
-        </label>
+      <label>
+        Senha Sefaz RR:
+        <input [(ngModel)]="clienteEditando.pass_sefaz" name="pass_sefaz" />
+      </label>
 
-         <label>
-          Senha Sefaz RR:
-          <input [(ngModel)]="clienteEditando.pass_sefaz" name="pass_sefaz" />
-        </label>
+      <label>
+        Inscrição Suframa:
+        <input [(ngModel)]="clienteEditando.inscricao_suframa" name="inscricao_suframa" />
+      </label>
 
-         <label>
-          Inscrição Suframa:
-          <input [(ngModel)]="clienteEditando.inscricao_suframa" name="inscricao_suframa" />
-        </label>
+      <label>
+        Senha Suframa:
+        <input [(ngModel)]="clienteEditando.pass_suframa" name="pass_suframa" />
+      </label>
 
-        <label>
-          Senha Sefaz RR:
-          <input [(ngModel)]="clienteEditando.pass_suframa" name="pass_suframa" />
-        </label>
+      <label>
+        QSA:
+        <input [(ngModel)]="clienteEditando.qsa" name="qsa" />
+      </label>
 
-         <label>
-          QSA:
-          <input [(ngModel)]="clienteEditando.qsa" name="qsa" />
-        </label>
+      <label>
+        Situação na Peace:
+        <input [(ngModel)]="clienteEditando.situacao_na_peace" name="situacao_na_peace" />
+      </label>
 
-        <label>
-          Situação na peace:
-          <input [(ngModel)]="clienteEditando.situacao_na_peace" name="situacao_na_peace" />
-        </label>
+      <label>
+        Emite NFSE?
+        <input [(ngModel)]="clienteEditando.emite_nfse" name="emite_nfse" />
+      </label>
 
-        <label>
-          Emite NFSE ?
-          <input [(ngModel)]="clienteEditando.emite_nfse" name="emite_nfse" />
-        </label>
+      <label>
+        Tipo de Tributação:
+        <input [(ngModel)]="clienteEditando.tributacao_id" name="tributacao_id" />
+      </label>
 
-        <label>
-          Tipo de tributação
-          <input [(ngModel)]="clienteEditando.tributacao_id" name="tributacao_id" />
-        </label>
+      <label>
+        Inscrição Municipal:
+        <input [(ngModel)]="clienteEditando.inscricao_municipal" name="inscricao_municipal" />
+      </label>
 
-         <label>
-          Inscrição Municipal
-          <input [(ngModel)]="clienteEditando.inscricao_municipal" name="inscricao_municipal" />
-        </label>
-
-         <label>
-          Processo Mensal
-          <input [(ngModel)]="clienteEditando.processo_mensal" name="processo_mensal" />
-        </label> -->
-
-        <div class="modal-buttons">
-          <button type="submit">Salvar</button>
-          <button type="button" (click)="fecharModal()">Cancelar</button>
-        </div>
-      </form>
+      <label>
+        Processo Mensal:
+        <input [(ngModel)]="clienteEditando.processo_mensal" name="processo_mensal" />
+      </label>
     </div>
-  </div>
+
+    <div class="form-buttons">
+      <button type="submit">Salvar</button>
+      <button type="button" (click)="fecharModal()">Cancelar</button>
+    </div>
+  </form>
+</div>
+
